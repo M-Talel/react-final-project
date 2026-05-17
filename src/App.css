@@ -14,7 +14,7 @@ body {
 }
 
 .navbar {
-  background: #000;
+  background: #0a1f44; /* navy blue */
   color: #fff;
   padding: 20px 30px;
   display: flex;

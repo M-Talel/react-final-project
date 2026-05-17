@@ -12,6 +12,8 @@ function App() {
   const [search, setSearch] = useState("");
   const [activePage, setActivePage] = useState("home");
 
+  const [editingProduct, setEditingProduct] = useState(null);
+
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -25,6 +27,21 @@ function App() {
       }
     ]);
     setActivePage("products");
+  }
+
+  function updateProduct(updatedProduct) {
+    setProducts(
+      products.map((product) =>
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
+    setEditingProduct(null);
+    setActivePage("products");
+  }
+
+  function startAddProduct() {
+    setEditingProduct(null);
+    setActivePage("add");
   }
 
   return (
@@ -44,10 +61,7 @@ function App() {
                 <strong>{products.length}</strong>
                 <span>Products in catalog</span>
               </div>
-              <div>
-                <strong>3</strong>
-                <span>Pages available</span>
-              </div>
+
             </div>
           </section>
         </>
@@ -56,11 +70,27 @@ function App() {
       {activePage === "products" && (
         <>
           <SearchBar search={search} setSearch={setSearch} />
-          <ProductList products={filteredProducts} />
+          <ProductList
+            products={filteredProducts}
+            onEdit={(product) => {
+              setEditingProduct(product);
+              setActivePage("add");
+            }}
+          />
         </>
       )}
 
-      {activePage === "add" && <ProductForm addProduct={addProduct} />}
+      {activePage === "add" && (
+        <ProductForm
+          addProduct={addProduct}
+          editingProduct={editingProduct}
+          onUpdate={updateProduct}
+          onCancel={() => {
+            setEditingProduct(null);
+            setActivePage("products");
+          }}
+        />
+      )}
     </div>
   );
 }

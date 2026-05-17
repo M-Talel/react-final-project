@@ -3,7 +3,8 @@ function ProductCard({
   price,
   category,
   stock,
-  image
+  image,
+  onEdit
 }) {
   return (
     <article className="product-card">
@@ -16,6 +17,12 @@ function ProductCard({
       <p>${price}</p>
 
       <small>Stock: {stock}</small>
+
+      <div className="product-card-actions">
+        <button type="button" onClick={onEdit}>
+          Edit
+        </button>
+      </div>
     </article>
   );
 }

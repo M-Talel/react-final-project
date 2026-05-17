@@ -1,24 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function ProductForm({ addProduct }) {
+
+function ProductForm({ addProduct, editingProduct, onUpdate, onCancel }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [stock, setStock] = useState("");
   const [image, setImage] = useState("");
 
+  const isEditMode = Boolean(editingProduct);
+
+  useEffect(() => {
+    if (!isEditMode) return;
+
+    setName(editingProduct.name ?? "");
+    setPrice(String(editingProduct.price ?? ""));
+    setCategory(editingProduct.category ?? "");
+    setStock(String(editingProduct.stock ?? ""));
+    setImage(editingProduct.image ?? "");
+  }, [isEditMode, editingProduct]);
+
+
   function handleSubmit(e) {
     e.preventDefault();
 
-    const newProduct = {
+    const productPayload = {
       name,
-      price,
+      price: Number(price),
       category,
-      stock,
+      stock: Number(stock),
       image
     };
 
-    addProduct(newProduct);
+    if (isEditMode) {
+      onUpdate({ ...editingProduct, ...productPayload });
+      return;
+    }
+
+    addProduct(productPayload);
 
     setName("");
     setPrice("");
@@ -29,7 +48,8 @@ function ProductForm({ addProduct }) {
 
   return (
     <form className="product-form" onSubmit={handleSubmit}>
-      <h2>Add Product</h2>
+      <h2>{isEditMode ? "Edit Product" : "Add Product"}</h2>
+
 
       <input
         type="text"
@@ -66,7 +86,19 @@ function ProductForm({ addProduct }) {
         onChange={(e) => setImage(e.target.value)}
       />
 
-      <button type="submit">Add Product</button>
+      <div className="product-form-actions">
+        {isEditMode && (
+          <button
+            type="button"
+            className="secondary"
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+        )}
+        <button type="submit">{isEditMode ? "Save Changes" : "Add Product"}</button>
+      </div>
+
     </form>
   );
 }

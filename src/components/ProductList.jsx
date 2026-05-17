@@ -1,6 +1,6 @@
 import ProductCard from "./ProductCard";
 
-function ProductList({ products }) {
+function ProductList({ products, onEdit }) {
   return (
     <main className="product-list">
       {products.map((product) => (
@@ -11,6 +11,7 @@ function ProductList({ products }) {
           category={product.category}
           stock={product.stock}
           image={product.image}
+          onEdit={() => onEdit(product)}
         />
       ))}
     </main>
