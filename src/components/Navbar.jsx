@@ -1,9 +1,15 @@
 function Navbar({ activePage, onNavigate }) {
   return (
     <nav className="navbar">
-      <h1>UrbanWear Admin</h1>
+      <div className="navbar-brand">
+        <span className="brand-mark">U</span>
+        <div>
+          <p className="brand-caption">UrbanWear</p>
+          <h1>Admin Portal</h1>
+        </div>
+      </div>
 
-      <ul>
+      <ul className="navbar-list">
         <li
           className={activePage === "home" ? "active" : ""}
           onClick={() => onNavigate("home")}

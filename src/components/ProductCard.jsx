@@ -1,26 +1,17 @@
-function ProductCard({
-  name,
-  price,
-  category,
-  stock,
-  image,
-  onEdit
-}) {
+function ProductCard({ name, price, category, stock, image, onEdit }) {
   return (
-    <article className="product-card">
-      <img src={image} alt={name} />
+    <article className="product-card card">
+      <div className="product-card-image">
+        <img src={image} alt={name} />
+        <span className="product-badge">{category}</span>
+      </div>
 
-      <h3>{name}</h3>
-
-      <p>Category: {category}</p>
-
-      <p>${price}</p>
-
-      <small>Stock: {stock}</small>
-
-      <div className="product-card-actions">
-        <button type="button" onClick={onEdit}>
-          Edit
+      <div className="product-card-body">
+        <h3>{name}</h3>
+        <p className="product-price">${price.toFixed(2)}</p>
+        <p className="product-stock">{stock} in stock</p>
+        <button type="button" className="secondary-button" onClick={onEdit}>
+          Edit Product
         </button>
       </div>
     </article>

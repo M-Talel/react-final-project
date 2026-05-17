@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-
 function ProductForm({ addProduct, editingProduct, onUpdate, onCancel }) {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -20,7 +19,6 @@ function ProductForm({ addProduct, editingProduct, onUpdate, onCancel }) {
     setImage(editingProduct.image ?? "");
   }, [isEditMode, editingProduct]);
 
-
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -29,7 +27,7 @@ function ProductForm({ addProduct, editingProduct, onUpdate, onCancel }) {
       price: Number(price),
       category,
       stock: Number(stock),
-      image
+      image,
     };
 
     if (isEditMode) {
@@ -47,58 +45,81 @@ function ProductForm({ addProduct, editingProduct, onUpdate, onCancel }) {
   }
 
   return (
-    <form className="product-form" onSubmit={handleSubmit}>
-      <h2>{isEditMode ? "Edit Product" : "Add Product"}</h2>
+    <form className="product-form card" onSubmit={handleSubmit}>
+      <div className="form-heading">
+        <div>
+          <p className="eyebrow">Product Manager</p>
+          <h2>{isEditMode ? "Edit Product" : "Add New Product"}</h2>
+        </div>
+      </div>
 
+      <label>
+        Product name
+        <input
+          type="text"
+          placeholder="Oversized Hoodie"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </label>
 
-      <input
-        type="text"
-        placeholder="Product Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+      <label>
+        Price ($)
+        <input
+          type="number"
+          placeholder="45"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          min="0"
+          required
+        />
+      </label>
 
-      <input
-        type="number"
-        placeholder="Price"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-      />
+      <label>
+        Category
+        <input
+          type="text"
+          placeholder="Hoodies"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+        />
+      </label>
 
-      <input
-        type="text"
-        placeholder="Category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      />
+      <label>
+        Stock quantity
+        <input
+          type="number"
+          placeholder="12"
+          value={stock}
+          onChange={(e) => setStock(e.target.value)}
+          min="0"
+          required
+        />
+      </label>
 
-      <input
-        type="number"
-        placeholder="Stock"
-        value={stock}
-        onChange={(e) => setStock(e.target.value)}
-      />
-
-      <input
-        type="text"
-        placeholder="Image URL"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-      />
+      <label>
+        Image URL
+        <input
+          type="url"
+          placeholder="https://images.unsplash.com/..."
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+          required
+        />
+      </label>
 
       <div className="product-form-actions">
         {isEditMode && (
-          <button
-            type="button"
-            className="secondary"
-            onClick={onCancel}
-          >
+          <button type="button" className="secondary" onClick={onCancel}>
             Cancel
           </button>
         )}
-        <button type="submit">{isEditMode ? "Save Changes" : "Add Product"}</button>
+        <button type="submit" className="primary-button">
+          {isEditMode ? "Save Product" : "Add Product"}
+        </button>
       </div>
-
     </form>
   );
 }

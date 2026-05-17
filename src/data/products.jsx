@@ -6,7 +6,7 @@ const products = [
     category: "Hoodies",
     stock: 12,
     image:
-      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab"
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const products = [
     category: "Jeans",
     stock: 8,
     image:
-      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246"
+      "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 3,
@@ -24,7 +24,25 @@ const products = [
     category: "T-Shirts",
     stock: 20,
     image:
-      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c"
+      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 4,
+    name: "Leather Bomber Jacket",
+    price: 135,
+    category: "Jackets",
+    stock: 5,
+    image:
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: 5,
+    name: "Soft Knit Sweater",
+    price: 55,
+    category: "Sweaters",
+    stock: 14,
+    image:
+      "https://images.unsplash.com/photo-1520975914030-13a4bb5d44de?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
