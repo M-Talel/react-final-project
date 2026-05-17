@@ -1,12 +1,11 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import SearchBar from "./components/SearchBar";
+import Hero from "./components/Hero"
+import SearchBar from "./components/Searchbar";
 import ProductForm from "./components/ProductForm";
 import ProductList from "./components/ProductList";
-import Footer from "./components/Footer";
 import productsData from "./data/products";
-import "./styles/App.css";
+import "./App.css";
 
 function App() {
   const [products, setProducts] = useState(productsData);
@@ -38,7 +37,6 @@ function App() {
 
       <ProductList products={filteredProducts} />
 
-      <Footer />
     </div>
   );
 }
