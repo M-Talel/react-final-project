@@ -1,3 +1,5 @@
+import sweaterImg from "../assets/soft-knit-sweater.svg";
+
 const products = [
   {
     id: 1,
@@ -41,8 +43,7 @@ const products = [
     price: 55,
     category: "Sweaters",
     stock: 14,
-    image:
-      "https://images.unsplash.com/photo-1520975914030-13a4bb5d44de?auto=format&fit=crop&w=800&q=80"
+    image: sweaterImg
   }
 ];
 
