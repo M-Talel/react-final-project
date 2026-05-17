@@ -65,10 +65,10 @@ function ProductForm({ addProduct, editingProduct, onUpdate, onCancel }) {
       </label>
 
       <label>
-        Price ($)
+        Price (Ksh)
         <input
           type="number"
-          placeholder="45"
+          placeholder="1000"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           min="0"

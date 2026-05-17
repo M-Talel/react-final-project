@@ -1,10 +1,8 @@
-import sweaterImg from "../assets/soft-knit-sweater.svg";
-
 const products = [
   {
     id: 1,
     name: "Oversized Hoodie",
-    price: 45,
+    price: 450,
     category: "Hoodies",
     stock: 12,
     image:
@@ -13,7 +11,7 @@ const products = [
   {
     id: 2,
     name: "Slim Fit Jeans",
-    price: 60,
+    price: 600,
     category: "Jeans",
     stock: 8,
     image:
@@ -22,7 +20,7 @@ const products = [
   {
     id: 3,
     name: "Graphic T-Shirt",
-    price: 25,
+    price: 250,
     category: "T-Shirts",
     stock: 20,
     image:
@@ -31,7 +29,7 @@ const products = [
   {
     id: 4,
     name: "Leather Bomber Jacket",
-    price: 135,
+    price: 1350,
     category: "Jackets",
     stock: 5,
     image:
@@ -40,10 +38,11 @@ const products = [
   {
     id: 5,
     name: "Soft Knit Sweater",
-    price: 55,
+    price: 550,
     category: "Sweaters",
     stock: 14,
-    image: sweaterImg
+    image:
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
