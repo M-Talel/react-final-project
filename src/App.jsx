@@ -10,6 +10,7 @@ import "./App.css";
 function App() {
   const [products, setProducts] = useState(productsData);
   const [search, setSearch] = useState("");
+  const [activePage, setActivePage] = useState("home");
 
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(search.toLowerCase())
@@ -23,20 +24,43 @@ function App() {
         id: products.length + 1
       }
     ]);
+    setActivePage("products");
   }
 
   return (
-    <div>
-      <Navbar />
+    <div className="app">
+      <Navbar activePage={activePage} onNavigate={setActivePage} />
 
-      <Hero />
+      {activePage === "home" && (
+        <>
+          <Hero />
+          <section className="home-summary">
+            <p>
+              Welcome to UrbanWear Admin. Use the navbar to view products,
+              search inventory, or add new items.
+            </p>
+            <div className="summary-cards">
+              <div>
+                <strong>{products.length}</strong>
+                <span>Products in catalog</span>
+              </div>
+              <div>
+                <strong>3</strong>
+                <span>Pages available</span>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
 
-      <SearchBar search={search} setSearch={setSearch} />
+      {activePage === "products" && (
+        <>
+          <SearchBar search={search} setSearch={setSearch} />
+          <ProductList products={filteredProducts} />
+        </>
+      )}
 
-      <ProductForm addProduct={addProduct} />
-
-      <ProductList products={filteredProducts} />
-
+      {activePage === "add" && <ProductForm addProduct={addProduct} />}
     </div>
   );
 }
