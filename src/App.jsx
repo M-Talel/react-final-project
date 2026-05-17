@@ -14,6 +14,8 @@ function App() {
   const [editingProduct, setEditingProduct] = useState(null);
 
   const filteredProducts = useMemo(
+    // Compute a filtered list only when `products` or `search` change.
+    // useMemo avoids recalculating on every render for small performance gains.
     () =>
       products.filter((product) =>
         product.name.toLowerCase().includes(search.toLowerCase())
@@ -22,16 +24,20 @@ function App() {
   );
 
   const categoryCount = useMemo(
+    // Count distinct categories using a Set — recalculated when products change.
     () => new Set(products.map((product) => product.category)).size,
     [products]
   );
 
   const lowStockCount = useMemo(
+    // Count items with low stock (<= 5) for dashboard summary.
     () => products.filter((product) => product.stock <= 5).length,
     [products]
   );
 
   function addProduct(newProduct) {
+    // Append new product with a simple incremental id.
+    // In a real app, IDs should come from a backend to avoid collisions.
     setProducts([
       ...products,
       {
@@ -39,10 +45,13 @@ function App() {
         id: products.length + 1,
       },
     ]);
+
+    // After adding, navigate to the products list view.
     setActivePage("products");
   }
 
   function updateProduct(updatedProduct) {
+    // Replace the matching product by id and return to products view.
     setProducts(
       products.map((product) =>
         product.id === updatedProduct.id ? updatedProduct : product

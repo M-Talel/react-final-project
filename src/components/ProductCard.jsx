@@ -8,6 +8,7 @@ function ProductCard({ name, price, category, stock, image, onEdit }) {
 
       <div className="product-card-body">
         <h3>{name}</h3>
+        {/* Price formatted to two decimals. For real currency, use Intl.NumberFormat. */}
         <p className="product-price">Ksh {price.toFixed(2)}</p>
         <p className="product-stock">{stock} in stock</p>
         <button type="button" className="secondary-button" onClick={onEdit}>

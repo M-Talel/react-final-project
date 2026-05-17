@@ -1,3 +1,0 @@
-- [x] Remove the “Pages available” counter card from the home page (src/App.jsx)
-- [x] Change navbar background color from black (#000) to navy blue in src/App.css
-- [x] Run lint/build (npm run build) to verify

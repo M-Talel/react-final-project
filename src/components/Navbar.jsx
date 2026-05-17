@@ -29,6 +29,11 @@ function Navbar({ activePage, onNavigate }) {
         <span />
       </button>
 
+      {/*
+        The navigation list is collapsed on small screens; `open` toggles
+        visibility. We keep the toggle state local to Navbar so the rest of
+        the app doesn't need to know about menu visibility.
+      */}
       <ul className={`navbar-list ${open ? "" : "collapsed"}`}>
         <li
           className={activePage === "home" ? "active" : ""}

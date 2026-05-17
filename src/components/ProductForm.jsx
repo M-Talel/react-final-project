@@ -10,6 +10,8 @@ function ProductForm({ addProduct, editingProduct, onUpdate, onCancel }) {
   const isEditMode = Boolean(editingProduct);
 
   useEffect(() => {
+    // When entering edit mode, populate local form state from `editingProduct`.
+    // We keep form state local so the form can be edited freely before saving.
     if (!isEditMode) return;
 
     setName(editingProduct.name ?? "");
@@ -31,6 +33,7 @@ function ProductForm({ addProduct, editingProduct, onUpdate, onCancel }) {
     };
 
     if (isEditMode) {
+      // Merge changes into the existing product object and send to parent.
       onUpdate({ ...editingProduct, ...productPayload });
       return;
     }
