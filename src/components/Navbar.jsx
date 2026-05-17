@@ -1,4 +1,13 @@
+import { useState } from "react";
+
 function Navbar({ activePage, onNavigate }) {
+  const [open, setOpen] = useState(false);
+
+  function handleNavigate(page) {
+    setOpen(false);
+    onNavigate(page);
+  }
+
   return (
     <nav className="navbar">
       <div className="navbar-brand">
@@ -9,22 +18,33 @@ function Navbar({ activePage, onNavigate }) {
         </div>
       </div>
 
-      <ul className="navbar-list">
+      <button
+        className={`hamburger-button ${open ? "open" : ""}`}
+        aria-expanded={open}
+        aria-label={open ? "Close menu" : "Open menu"}
+        onClick={() => setOpen((s) => !s)}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
+
+      <ul className={`navbar-list ${open ? "" : "collapsed"}`}>
         <li
           className={activePage === "home" ? "active" : ""}
-          onClick={() => onNavigate("home")}
+          onClick={() => handleNavigate("home")}
         >
           Home
         </li>
         <li
           className={activePage === "products" ? "active" : ""}
-          onClick={() => onNavigate("products")}
+          onClick={() => handleNavigate("products")}
         >
           Products
         </li>
         <li
           className={activePage === "add" ? "active" : ""}
-          onClick={() => onNavigate("add")}
+          onClick={() => handleNavigate("add")}
         >
           Add Product
         </li>

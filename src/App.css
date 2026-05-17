@@ -10,6 +10,7 @@
     sans-serif;
   background: #f8fafc;
   color: #111827;
+  --navbar-height: 72px; /* Added navbar height variable */
 }
 
 body {
@@ -37,21 +38,26 @@ button {
 .page-frame {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 24px 20px 40px;
+  padding: calc(var(--navbar-height) + 24px) 20px 40px;
 }
 
 .navbar {
   background: rgba(15, 23, 42, 0.95);
   color: #f8fafc;
-  padding: 20px 24px;
+  padding: 12px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 10;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  z-index: 999;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.12);
+  backdrop-filter: blur(6px);
 }
 
 .navbar-brand {
@@ -395,16 +401,79 @@ button {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --navbar-height: 110px; /* when stacked, navbar grows */
+  }
+
   .page-frame {
-    padding: 20px 16px 32px;
+    padding: calc(var(--navbar-height) + 16px) 16px 32px;
   }
 
   .navbar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 12px 16px;
+    height: var(--navbar-height);
+    gap: 8px;
   }
 
   .navbar-list {
+    width: 100%;
+    display: flex;
+    gap: 8px;
     flex-wrap: wrap;
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.98);
+    padding: 12px 16px 16px;
+    flex-direction: column;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+}
+
+/* Hamburger button (hidden on wide screens) */
+.hamburger-button {
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  margin-left: 8px;
+  align-self: center;
+}
+
+.hamburger-button span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #f8fafc;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: transform 200ms ease, opacity 200ms ease;
+  transform-origin: center;
+}
+
+@media (max-width: 640px) {
+  .hamburger-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .navbar-list.collapsed {
+    display: none;
+  }
+
+  .hamburger-button.open span:nth-child(1) {
+    transform: translateY(0.5px) rotate(45deg);
+  }
+  .hamburger-button.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .hamburger-button.open span:nth-child(3) {
+    transform: translateY(-0.5px) rotate(-45deg);
   }
 }
