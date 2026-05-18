@@ -1,17 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useMemo, useState } from "react";
-
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
 import AddProductPage from "./pages/AddProductPage";
 import EditProductPage from "./pages/EditProductPage";
 
+import { useState, useMemo } from "react";
 import productsData from "./data/products";
 
-import "./App.css";
-
-export default function App() {
+export default function RoutesApp() {
   const [products, setProducts] = useState(productsData);
   const [search, setSearch] = useState("");
 
@@ -79,4 +76,5 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
 

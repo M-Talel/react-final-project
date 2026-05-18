@@ -9,17 +9,21 @@ function ProductForm({ addProduct, editingProduct, onUpdate, onCancel }) {
 
   const isEditMode = Boolean(editingProduct);
 
+  // eslint/react-hooks warning fix: defer setState to next tick.
   useEffect(() => {
-    // When entering edit mode, populate local form state from `editingProduct`.
-    // We keep form state local so the form can be edited freely before saving.
     if (!isEditMode) return;
 
-    setName(editingProduct.name ?? "");
-    setPrice(String(editingProduct.price ?? ""));
-    setCategory(editingProduct.category ?? "");
-    setStock(String(editingProduct.stock ?? ""));
-    setImage(editingProduct.image ?? "");
+    const t = setTimeout(() => {
+      setName(editingProduct.name ?? "");
+      setPrice(String(editingProduct.price ?? ""));
+      setCategory(editingProduct.category ?? "");
+      setStock(String(editingProduct.stock ?? ""));
+      setImage(editingProduct.image ?? "");
+    }, 0);
+
+    return () => clearTimeout(t);
   }, [isEditMode, editingProduct]);
+
 
   function handleSubmit(e) {
     e.preventDefault();

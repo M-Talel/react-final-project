@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
-function Navbar({ activePage, onNavigate }) {
+function Navbar() {
   const [open, setOpen] = useState(false);
 
-  function handleNavigate(page) {
+  function handleNavClick() {
     setOpen(false);
-    onNavigate(page);
   }
 
   return (
@@ -29,33 +29,45 @@ function Navbar({ activePage, onNavigate }) {
         <span />
       </button>
 
-      {/*
-        The navigation list is collapsed on small screens; `open` toggles
-        visibility. We keep the toggle state local to Navbar so the rest of
-        the app doesn't need to know about menu visibility.
-      */}
       <ul className={`navbar-list ${open ? "" : "collapsed"}`}>
-        <li
-          className={activePage === "home" ? "active" : ""}
-          onClick={() => handleNavigate("home")}
-        >
-          Home
+        <li>
+          <NavLink
+            to="/"
+            onClick={handleNavClick}
+            className={({ isActive }) =>
+              isActive ? "nav-link active-home" : "nav-link"
+            }
+          >
+            Home
+          </NavLink>
         </li>
-        <li
-          className={activePage === "products" ? "active" : ""}
-          onClick={() => handleNavigate("products")}
-        >
-          Products
+        <li>
+          <NavLink
+            to="/products"
+            onClick={handleNavClick}
+            className={({ isActive }) =>
+              isActive ? "nav-link active-products" : "nav-link"
+            }
+          >
+            Products
+          </NavLink>
         </li>
-        <li
-          className={activePage === "add" ? "active" : ""}
-          onClick={() => handleNavigate("add")}
-        >
-          Add Product
+        <li>
+          <NavLink
+            to="/add"
+            onClick={handleNavClick}
+            className={({ isActive }) =>
+              isActive ? "nav-link active-add" : "nav-link"
+            }
+          >
+            Add Product
+          </NavLink>
         </li>
+
       </ul>
     </nav>
   );
 }
 
 export default Navbar;
+

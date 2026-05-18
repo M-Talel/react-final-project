@@ -106,10 +106,47 @@ button {
   color: inherit;
 }
 
-.navbar-list li:hover,
-.navbar-list li.active {
+.navbar-list li:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.navbar-list a.nav-link {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navbar-list a.nav-link:hover {
   background: rgba(255, 255, 255, 0.12);
 }
+
+/* Active tab colors + hover tint */
+.navbar-list a.nav-link.active-home {
+  background: rgba(245, 158, 11, 0.22);
+}
+.navbar-list a.nav-link.active-home:hover {
+  background: rgba(245, 158, 11, 0.28);
+}
+
+.navbar-list a.nav-link.active-products {
+  background: rgba(56, 189, 248, 0.22);
+}
+.navbar-list a.nav-link.active-products:hover {
+  background: rgba(56, 189, 248, 0.28);
+}
+
+.navbar-list a.nav-link.active-add {
+  background: rgba(16, 185, 129, 0.22);
+}
+.navbar-list a.nav-link.active-add:hover {
+  background: rgba(16, 185, 129, 0.28);
+}
+
 
 .hero-card {
   background: white;

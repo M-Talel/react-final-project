@@ -1,4 +1,4 @@
-function Hero({ productCount, categoryCount, lowStockCount }) {
+function Hero({ productCount, categoryCount }) {
   return (
     <section className="hero-card">
       <div className="hero-copy">
@@ -18,10 +18,6 @@ function Hero({ productCount, categoryCount, lowStockCount }) {
         <div>
           <p>Categories</p>
           <strong>{categoryCount}</strong>
-        </div>
-        <div>
-          <p>Low stock</p>
-          <strong>{lowStockCount}</strong>
         </div>
       </div>
     </section>
