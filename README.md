@@ -42,7 +42,3 @@ npm run build
 - Data is stored only in-memory; refreshing the page resets changes.
 - No authentication or backend integration.
 - Limited formatting.
-
-## Notes on Development
-
--
