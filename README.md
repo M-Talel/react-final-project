@@ -42,3 +42,5 @@ npm run build
 - Data is stored only in-memory; refreshing the page resets changes.
 - No authentication or backend integration.
 - Limited formatting.
+
+[JSON Server:](https://my-products-api-0fkb.onrender.com/products)
