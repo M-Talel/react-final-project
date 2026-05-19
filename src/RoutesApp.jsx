@@ -5,35 +5,60 @@ import ProductsPage from "./pages/ProductsPage";
 import AddProductPage from "./pages/AddProductPage";
 import EditProductPage from "./pages/EditProductPage";
 
-import { useState, useMemo } from "react";
-import productsData from "./data/products";
+import { useEffect, useMemo, useState } from "react";
+
+import { createProduct, fetchProducts, updateProductById } from "./data/productsApi";
 
 export default function RoutesApp() {
-  const [products, setProducts] = useState(productsData);
+  const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    async function load() {
+      try {
+        const data = await fetchProducts();
+        if (!isCancelled) setProducts(Array.isArray(data) ? data : []);
+      } catch (e) {
+        console.error("Failed to load products:", e);
+        if (!isCancelled) setProducts([]);
+      }
+    }
+
+    load();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   const categoryCount = useMemo(
     () => new Set(products.map((product) => product.category)).size,
     [products]
   );
 
-  function addProduct(newProduct) {
-    setProducts((prev) => [
-      ...prev,
-      {
-        ...newProduct,
-        id: prev.length + 1,
-      },
-    ]);
+  async function addProduct(newProduct) {
+    const created = await createProduct(newProduct);
+    setProducts((prev) => [...prev, created]);
   }
 
-  function updateProduct(updatedProduct) {
+  async function updateProduct(updatedProduct) {
+    const saved = await updateProductById(updatedProduct.id, {
+      name: updatedProduct.name,
+      price: updatedProduct.price,
+      category: updatedProduct.category,
+      stock: updatedProduct.stock,
+      image: updatedProduct.image,
+    });
+
     setProducts((prev) =>
       prev.map((product) =>
-        product.id === updatedProduct.id ? updatedProduct : product
+        product.id === saved.id ? saved : product
       )
     );
   }
+
 
   return (
     <BrowserRouter>
